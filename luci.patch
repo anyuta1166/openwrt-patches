@@ -1,0 +1,31 @@
+diff --git a/modules/luci-mod-admin-full/patches/001-wifi.patch b/modules/luci-mod-admin-full/patches/001-wifi.patch
+index e69de29bb..fdc95024e 100644
+--- a/modules/luci-mod-admin-full/patches/001-wifi.patch
++++ b/modules/luci-mod-admin-full/patches/001-wifi.patch
+@@ -0,0 +1,26 @@
++--- a/luasrc/model/cbi/admin_network/wifi.lua
+++++ b/luasrc/model/cbi/admin_network/wifi.lua
++@@ -245,6 +245,10 @@ if hwtype == "mac80211" then
++ 
++ 	s:taboption("advanced", Value, "frag", translate("Fragmentation Threshold"))
++ 	s:taboption("advanced", Value, "rts", translate("RTS/CTS Threshold"))
+++
+++	s:taboption("advanced", Flag, "noscan", translate("Force 40MHz"),
+++	 translate("Do not scan for neighboring BSSes prior to enabling 40 MHz channel"))
+++
++ end
++ 
++ 
++@@ -466,6 +470,12 @@ if hwtype == "mac80211" then
++ 	isolate:depends({mode="ap"})
++ 	isolate:depends({mode="ap-wds"})
++ 
+++	disassoc = s:taboption("advanced", Flag, "disassoc_low_ack", translate("Disassociate stations with low ACK"),
+++	 translate("Disassociate stations based on excessive transmission failures or other indications of connection loss"))
+++	disassoc:depends({mode="ap"})
+++	disassoc:depends({mode="ap-wds"})
+++	disassoc.default = disassoc.enabled
+++
++ 	ifname = s:taboption("advanced", Value, "ifname", translate("Interface name"), translate("Override default interface name"))
++ 	ifname.optional = true
++ end
