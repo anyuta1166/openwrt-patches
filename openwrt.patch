@@ -18,7 +18,7 @@ index 30fbd6f7a9..ce66a9015f 100644
  		string "Build suffix to append to the target BUILD_DIR variable" if DEVEL
  		default ""
 diff --git a/include/image.mk b/include/image.mk
-index 3f5b4544e9..12ec9f8525 100644
+index 605cb06672..08a5e35325 100644
 --- a/include/image.mk
 +++ b/include/image.mk
 @@ -39,6 +39,10 @@ KDIR=$(KERNEL_BUILD_DIR)
@@ -33,7 +33,7 @@ index 3f5b4544e9..12ec9f8525 100644
  IMG_PREFIX_VERNUM:=$(if $(CONFIG_VERSION_FILENAMES),$(call sanitize,$(VERSION_NUMBER))-)
  IMG_PREFIX_VERCODE:=$(if $(CONFIG_VERSION_CODE_FILENAMES),$(call sanitize,$(VERSION_CODE))-)
 diff --git a/include/netfilter.mk b/include/netfilter.mk
-index 2d537583bd..5712131bc9 100644
+index 616425cb08..e32c88fd41 100644
 --- a/include/netfilter.mk
 +++ b/include/netfilter.mk
 @@ -202,6 +202,14 @@ $(eval $(call nf_add,IPT_NAT_EXTRA,CONFIG_IP_NF_TARGET_NETMAP, $(P_XT)xt_NETMAP)
@@ -73,7 +73,7 @@ index 2d537583bd..5712131bc9 100644
  
  # ulog
 diff --git a/package/kernel/linux/modules/netfilter.mk b/package/kernel/linux/modules/netfilter.mk
-index 0ad6987aa6..84a585c0f1 100644
+index 0d817ed7f4..c958763bb3 100644
 --- a/package/kernel/linux/modules/netfilter.mk
 +++ b/package/kernel/linux/modules/netfilter.mk
 @@ -360,6 +360,10 @@ define KernelPackage/nf-nathelper/description
@@ -100,4 +100,17 @@ index 0ad6987aa6..84a585c0f1 100644
 - - tftp
   - broadcast
  endef
+ 
+diff --git a/target/linux/x86/Makefile b/target/linux/x86/Makefile
+index 47ebca1594..533c0e5248 100644
+--- a/target/linux/x86/Makefile
++++ b/target/linux/x86/Makefile
+@@ -13,7 +13,7 @@ FEATURES:=squashfs ext4 vdi vmdk pcmcia targz fpu
+ SUBTARGETS:=generic legacy geode 64
+ MAINTAINER:=Felix Fietkau <nbd@nbd.name>
+ 
+-KERNEL_PATCHVER:=4.9
++KERNEL_PATCHVER:=4.14
+ 
+ KERNELNAME:=bzImage
  
