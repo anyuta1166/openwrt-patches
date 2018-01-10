@@ -1,0 +1,34 @@
+diff --git a/config/Config-devel.in b/config/Config-devel.in
+index 30fbd6f7a9..ce66a9015f 100644
+--- a/config/Config-devel.in
++++ b/config/Config-devel.in
+@@ -47,6 +47,14 @@ menuconfig DEVEL
+ 		  This allows you to symlink build_dir into a scratch location, e.g. a ramdisk,
+ 		  which does not have enough space to keep a complete build_dir.
+ 
++	config EXTRA_IMAGE_NAME
++		string "Extra name to include in produced images" if DEVEL
++		default ""
++		help
++		  Extra string that is included before the $(BOARD) part in the filenames of produced images.
++		  This allows you to create images with different .config files without overwriting previously
++		  built images.
++
+ 	config BUILD_SUFFIX
+ 		string "Build suffix to append to the target BUILD_DIR variable" if DEVEL
+ 		default ""
+diff --git a/include/image.mk b/include/image.mk
+index 3f5b4544e9..12ec9f8525 100644
+--- a/include/image.mk
++++ b/include/image.mk
+@@ -39,6 +39,10 @@ KDIR=$(KERNEL_BUILD_DIR)
+ KDIR_TMP=$(KDIR)/tmp
+ DTS_DIR:=$(LINUX_DIR)/arch/$(LINUX_KARCH)/boot/dts
+ 
++# If there is no explicit EXTRA_IMAGE_NAME use the unquoted one from the .config
++ifeq ($(EXTRA_IMAGE_NAME),)
++  EXTRA_IMAGE_NAME := $(call qstrip,$(CONFIG_EXTRA_IMAGE_NAME))
++endif
+ IMG_PREFIX_EXTRA:=$(if $(EXTRA_IMAGE_NAME),$(call sanitize,$(EXTRA_IMAGE_NAME))-)
+ IMG_PREFIX_VERNUM:=$(if $(CONFIG_VERSION_FILENAMES),$(call sanitize,$(VERSION_NUMBER))-)
+ IMG_PREFIX_VERCODE:=$(if $(CONFIG_VERSION_CODE_FILENAMES),$(call sanitize,$(VERSION_CODE))-)
