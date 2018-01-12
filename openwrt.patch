@@ -18,7 +18,7 @@ index 30fbd6f7a9..ce66a9015f 100644
  		string "Build suffix to append to the target BUILD_DIR variable" if DEVEL
  		default ""
 diff --git a/include/image.mk b/include/image.mk
-index 605cb06672..08a5e35325 100644
+index af01951b49..44e61700fd 100644
 --- a/include/image.mk
 +++ b/include/image.mk
 @@ -39,6 +39,10 @@ KDIR=$(KERNEL_BUILD_DIR)
