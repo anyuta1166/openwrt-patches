@@ -73,10 +73,10 @@ index 616425cb08..e32c88fd41 100644
  
  # ulog
 diff --git a/package/kernel/linux/modules/netfilter.mk b/package/kernel/linux/modules/netfilter.mk
-index 0d817ed7f4..c958763bb3 100644
+index f458457500..b2c8315fdf 100644
 --- a/package/kernel/linux/modules/netfilter.mk
 +++ b/package/kernel/linux/modules/netfilter.mk
-@@ -360,6 +360,10 @@ define KernelPackage/nf-nathelper/description
+@@ -361,6 +361,10 @@ define KernelPackage/nf-nathelper/description
   Default Netfilter (IPv4) Conntrack and NAT helpers
   Includes:
   - ftp
@@ -87,7 +87,7 @@ index 0d817ed7f4..c958763bb3 100644
  endef
  
  $(eval $(call KernelPackage,nf-nathelper))
-@@ -379,13 +383,9 @@ define KernelPackage/nf-nathelper-extra/description
+@@ -380,13 +384,9 @@ define KernelPackage/nf-nathelper-extra/description
   Includes:
   - amanda
   - h323
