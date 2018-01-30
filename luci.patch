@@ -1,3 +1,25 @@
+diff --git a/applications/luci-app-vnstat/patches/001-noremove.patch b/applications/luci-app-vnstat/patches/001-noremove.patch
+new file mode 100644
+index 0000000..77d112d
+--- /dev/null
++++ b/applications/luci-app-vnstat/patches/001-noremove.patch
+@@ -0,0 +1,16 @@
++--- a/luasrc/model/cbi/vnstat.lua
+++++ b/luasrc/model/cbi/vnstat.lua
++@@ -63,13 +63,6 @@ function mon_ifaces.write(self, section,
++ 		end
++ 	end
++ 
++-	for i, _ in pairs(ifaces) do
++-		if not s[i] then
++-			fs.unlink(dbdir .. "/" .. i)
++-			fs.unlink(dbdir .. "/." .. i)
++-		end
++-	end
++-
++ 	if next(s) then
++ 		m.uci:set_list("vnstat", section, "interface", utl.keys(s))
++ 	else
 diff --git a/modules/luci-mod-admin-full/patches/001-wifi.patch b/modules/luci-mod-admin-full/patches/001-wifi.patch
 new file mode 100644
 index 0000000..fdc9502
