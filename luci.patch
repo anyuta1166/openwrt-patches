@@ -1,6 +1,7 @@
 diff --git a/modules/luci-mod-admin-full/patches/001-wifi.patch b/modules/luci-mod-admin-full/patches/001-wifi.patch
-index e69de29bb..fdc95024e 100644
---- a/modules/luci-mod-admin-full/patches/001-wifi.patch
+new file mode 100644
+index 0000000..fdc9502
+--- /dev/null
 +++ b/modules/luci-mod-admin-full/patches/001-wifi.patch
 @@ -0,0 +1,26 @@
 +--- a/luasrc/model/cbi/admin_network/wifi.lua
