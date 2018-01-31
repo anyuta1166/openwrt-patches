@@ -16,6 +16,25 @@ index c60c649..2b8aa65 100644
  	if next(s) then
  		m.uci:set_list("vnstat", section, "interface", utl.keys(s))
  	else
+diff --git a/modules/luci-mod-admin-full/luasrc/model/cbi/admin_network/dhcp.lua b/modules/luci-mod-admin-full/luasrc/model/cbi/admin_network/dhcp.lua
+index 2acda0b..eebfcea 100644
+--- a/modules/luci-mod-admin-full/luasrc/model/cbi/admin_network/dhcp.lua
++++ b/modules/luci-mod-admin-full/luasrc/model/cbi/admin_network/dhcp.lua
+@@ -141,6 +141,14 @@ df.optional = true
+ df.placeholder = "/example.org/10.1.2.3"
+ 
+ 
++ad = s:taboption("general", DynamicList, "address",
++	translate("Local defined domains"),
++	translate("List of customized domains resolved locally and never forwarded to upstream"))
++
++ad.optional = true
++ad.placeholder = "/myservice.lan/192.168.1.123"
++
++
+ rp = s:taboption("general", Flag, "rebind_protection",
+ 	translate("Rebind protection"),
+ 	translate("Discard upstream RFC1918 responses"))
 diff --git a/modules/luci-mod-admin-full/luasrc/model/cbi/admin_network/wifi.lua b/modules/luci-mod-admin-full/luasrc/model/cbi/admin_network/wifi.lua
 index c0bb380..5ff0026 100644
 --- a/modules/luci-mod-admin-full/luasrc/model/cbi/admin_network/wifi.lua
