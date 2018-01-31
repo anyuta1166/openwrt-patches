@@ -1,5 +1,5 @@
 diff --git a/config/Config-devel.in b/config/Config-devel.in
-index 30fbd6f7a9..ce66a9015f 100644
+index fd7c3ead1e..96de93971b 100644
 --- a/config/Config-devel.in
 +++ b/config/Config-devel.in
 @@ -47,6 +47,14 @@ menuconfig DEVEL
@@ -33,10 +33,10 @@ index af01951b49..44e61700fd 100644
  IMG_PREFIX_VERNUM:=$(if $(CONFIG_VERSION_FILENAMES),$(call sanitize,$(VERSION_NUMBER))-)
  IMG_PREFIX_VERCODE:=$(if $(CONFIG_VERSION_CODE_FILENAMES),$(call sanitize,$(VERSION_CODE))-)
 diff --git a/include/netfilter.mk b/include/netfilter.mk
-index 616425cb08..e32c88fd41 100644
+index c99b6fb3f7..2f8dd24b20 100644
 --- a/include/netfilter.mk
 +++ b/include/netfilter.mk
-@@ -202,6 +202,14 @@ $(eval $(call nf_add,IPT_NAT_EXTRA,CONFIG_IP_NF_TARGET_NETMAP, $(P_XT)xt_NETMAP)
+@@ -204,6 +204,14 @@ $(eval $(call nf_add,IPT_NAT_EXTRA,CONFIG_IP_NF_TARGET_NETMAP, $(P_XT)xt_NETMAP)
  
  $(eval $(call nf_add,NF_NATHELPER,CONFIG_NF_CONNTRACK_FTP, $(P_XT)nf_conntrack_ftp))
  $(eval $(call nf_add,NF_NATHELPER,CONFIG_NF_NAT_FTP, $(P_XT)nf_nat_ftp))
@@ -51,7 +51,7 @@ index 616425cb08..e32c88fd41 100644
  
  
  # nathelper-extra
-@@ -209,20 +217,12 @@ $(eval $(call nf_add,NF_NATHELPER,CONFIG_NF_NAT_FTP, $(P_XT)nf_nat_ftp))
+@@ -211,20 +219,12 @@ $(eval $(call nf_add,NF_NATHELPER,CONFIG_NF_NAT_FTP, $(P_XT)nf_nat_ftp))
  $(eval $(call nf_add,NF_NATHELPER_EXTRA,CONFIG_NF_CONNTRACK_BROADCAST, $(P_XT)nf_conntrack_broadcast))
  $(eval $(call nf_add,NF_NATHELPER_EXTRA,CONFIG_NF_CONNTRACK_AMANDA, $(P_XT)nf_conntrack_amanda))
  $(eval $(call nf_add,NF_NATHELPER_EXTRA,CONFIG_NF_NAT_AMANDA, $(P_XT)nf_nat_amanda))
@@ -73,10 +73,10 @@ index 616425cb08..e32c88fd41 100644
  
  # ulog
 diff --git a/package/kernel/linux/modules/netfilter.mk b/package/kernel/linux/modules/netfilter.mk
-index f458457500..b2c8315fdf 100644
+index d44d2f8f3b..959c03c3ff 100644
 --- a/package/kernel/linux/modules/netfilter.mk
 +++ b/package/kernel/linux/modules/netfilter.mk
-@@ -361,6 +361,10 @@ define KernelPackage/nf-nathelper/description
+@@ -387,6 +387,10 @@ define KernelPackage/nf-nathelper/description
   Default Netfilter (IPv4) Conntrack and NAT helpers
   Includes:
   - ftp
@@ -87,7 +87,7 @@ index f458457500..b2c8315fdf 100644
  endef
  
  $(eval $(call KernelPackage,nf-nathelper))
-@@ -380,13 +384,9 @@ define KernelPackage/nf-nathelper-extra/description
+@@ -406,13 +410,9 @@ define KernelPackage/nf-nathelper-extra/description
   Includes:
   - amanda
   - h323
