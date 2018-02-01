@@ -1,0 +1,23 @@
+diff --git a/libs/libssh2/Makefile b/libs/libssh2/Makefile
+index e996dfad..c54c3402 100644
+--- a/libs/libssh2/Makefile
++++ b/libs/libssh2/Makefile
+@@ -29,7 +29,7 @@ define Package/libssh2
+   CATEGORY:=Libraries
+   TITLE:=SSH2 library
+   URL:=https://www.libssh2.org/
+-  DEPENDS:=+libmbedtls +zlib
++  DEPENDS:=+libopenssl +zlib
+   MAINTAINER:=Jiri Slachta <jiri@slachta.eu>
+ endef
+ 
+@@ -42,8 +42,7 @@ TARGET_CFLAGS += $(FPIC)
+ CONFIGURE_ARGS += \
+ 	--disable-examples-build \
+ 	--disable-silent-rules \
+-	--with-mbedtls \
+-	--with-libmbedtls-prefix=$(STAGING_DIR)/usr \
++	--with-libssl-prefix=$(STAGING_DIR)/usr \
+ 	--with-libz-prefix=$(STAGING_DIR)/usr
+ 
+ define Build/InstallDev
