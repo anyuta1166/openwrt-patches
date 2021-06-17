@@ -1,3 +1,33 @@
+diff --git a/applications/luci-app-polipo/luasrc/model/cbi/polipo.lua b/applications/luci-app-polipo/luasrc/model/cbi/polipo.lua
+index 6031c8423..8308b2c46 100644
+--- a/applications/luci-app-polipo/luasrc/model/cbi/polipo.lua
++++ b/applications/luci-app-polipo/luasrc/model/cbi/polipo.lua
+@@ -92,6 +92,25 @@ o.optional = true
+ o.placeholder = "username:password"
+ 
+ 
++o = s:taboption("proxy", Value, "socksParentProxy",
++	translate("SOCKS parent proxy address"),
++	translate("SOCKS parent proxy address (in host:port format), to which Polipo " ..
++		"will forward the requests."))
++
++
++o.optional = true
++o.datatype = "hostport"
++
++
++o = s:taboption("proxy", ListValue, "socksProxyType",
++	translate("SOCKS parent proxy type"),
++	translate("The variant of the SOCKS protocol being used."))
++
++o.default = "socks5"
++o:value("socks4a", translate("SOCKS4a"))
++o:value("socks5", translate("SOCKS5"))
++
++
+ -- Logging
+ s:taboption("logging", Flag, "logSyslog", translate("Log to syslog"))
+ 
 diff --git a/applications/luci-app-tinyproxy/luasrc/model/cbi/tinyproxy.lua b/applications/luci-app-tinyproxy/luasrc/model/cbi/tinyproxy.lua
 index e38dec4b9..7d21f36b3 100644
 --- a/applications/luci-app-tinyproxy/luasrc/model/cbi/tinyproxy.lua
