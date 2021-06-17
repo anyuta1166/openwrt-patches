@@ -1,0 +1,77 @@
+diff --git a/net/tinyproxy/files/tinyproxy.config b/net/tinyproxy/files/tinyproxy.config
+index ac7b46ff0..fe5bf39a1 100644
+--- a/net/tinyproxy/files/tinyproxy.config
++++ b/net/tinyproxy/files/tinyproxy.config
+@@ -200,46 +200,46 @@ list ConnectPort 563
+ #  # connection to test domain goes through testproxy
+ #
+ #config upstream
+-#	option type proxy
++#	option type http
+ #	option via testproxy:8008
+ #	option target ".test.domain.invalid"
+ #
+ #config upstream
+-#	option type proxy
++#	option type http
+ #	option via testproxy:8008
+ #	option target ".our_testbed.example.com"
+ #
+ #config upstream
+-#	option type proxy
++#	option type http
+ #	option via testproxy:8008
+ #	option target "192.168.128.0/255.255.254.0"
+ #
+ #  # no upstream proxy for internal websites and unqualified hosts
+ #
+ #config upstream
+-#	option type reject
++#	option type none
+ #	option target ".internal.example.com"
+ #
+ #config upstream
+-#	option type reject
++#	option type none
+ #	option target "www.example.com"
+ #
+ #config upstream
+-#	option type reject
++#	option type none
+ #	option target "10.0.0.0/8"
+ #
+ #config upstream
+-#	option type reject
++#	option type none
+ #	option target "192.168.0.0/255.255.254.0"
+ #
+ #config upstream
+-#	option type reject
++#	option type none
+ #	option target "."
+ #
+ #  # default upstream is internet firewall
+ #
+ #config upstream
+-#	option type proxy
++#	option type http
+ #	option via firewall.internal.example.com:80
+ #
+ # The LAST matching rule wins the route decision.  As you can see, you
+diff --git a/net/tinyproxy/files/tinyproxy.init b/net/tinyproxy/files/tinyproxy.init
+index 1feac669c..32c72d59e 100644
+--- a/net/tinyproxy/files/tinyproxy.init
++++ b/net/tinyproxy/files/tinyproxy.init
+@@ -23,11 +23,7 @@ write_upstream() {
+ 	config_get target "$1" target
+ 	[ -n "$target" ] && target=' "'"$target"'"'
+ 
+-	[ "$type" = "proxy" ] && [ -n "$via" ] && \
+-		echo "upstream $via$target"
+-
+-	[ "$type" = "reject" ] && [ -n "$target" ] && \
+-		echo "no upstream$target"
++	echo "upstream $type $via$target"
+ }
+ 
+ proxy_atom() {

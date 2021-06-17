@@ -1,0 +1,39 @@
+diff --git a/applications/luci-app-tinyproxy/luasrc/model/cbi/tinyproxy.lua b/applications/luci-app-tinyproxy/luasrc/model/cbi/tinyproxy.lua
+index e38dec4b9..7d21f36b3 100644
+--- a/applications/luci-app-tinyproxy/luasrc/model/cbi/tinyproxy.lua
++++ b/applications/luci-app-tinyproxy/luasrc/model/cbi/tinyproxy.lua
+@@ -215,11 +215,13 @@ s.anonymous = true
+ s.addremove = true
+ 
+ 
+-t = s:option(ListValue, "type", translate("Policy"),
+-	translate("<em>Via proxy</em> routes requests to the given target via the specified upstream proxy, <em>Reject access</em> disables any upstream proxy for the target"))
++t = s:option(ListValue, "type", translate("Proxy type"),
++	translate("Choose upstream proxy type. <em>No proxy</em> disables use of an upstream proxy for the target"))
+ 
+-t:value("proxy", translate("Via proxy"))
+-t:value("reject", translate("Reject access"))
++t:value("http", translate("HTTP proxy"))
++t:value("socks4", translate("SOCKS4 proxy"))
++t:value("socks5", translate("SOCKS5 proxy"))
++t:value("none", translate("No proxy"))
+ 
+ 
+ ta = s:option(Value, "target", translate("Target host"),
+@@ -227,13 +229,14 @@ ta = s:option(Value, "target", translate("Target host"),
+ 
+ ta.rmempty = true
+ ta.placeholder = "0.0.0.0/0"
+-ta.datatype = "host(1)"
+ 
+ 
+ v = s:option(Value, "via", translate("Via proxy"),
+ 	translate("Specifies the upstream proxy to use for accessing the target host. Format is <code>address:port</code>"))
+ 
+-v:depends({type="proxy"})
++v:depends({type="http"})
++v:depends({type="socks4"})
++v:depends({type="socks5"})
+ v.placeholder = "10.0.0.1:8080"
+ v.datatype = "ip4addrport"
+ 
