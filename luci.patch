@@ -1,3 +1,30 @@
+diff --git a/applications/luci-app-openvpn/luasrc/controller/openvpn.lua b/applications/luci-app-openvpn/luasrc/controller/openvpn.lua
+index a30ac81a9..b41fff21d 100644
+--- a/applications/luci-app-openvpn/luasrc/controller/openvpn.lua
++++ b/applications/luci-app-openvpn/luasrc/controller/openvpn.lua
+@@ -31,8 +31,7 @@ function ovpn_upload()
+ 
+ 		http.setfilehandler(
+ 			function(meta, chunk, eof)
+-				local data = util.trim(chunk:gsub("\r\n", "\n")) .. "\n"
+-				data = util.trim(data:gsub("[\128-\255]", ""))
++				local data = chunk:gsub("\r\n", "\n")
+ 
+ 				if not fp and meta and meta.name == "ovpn_file" then
+ 					fp = io.open(file, "w")
+diff --git a/applications/luci-app-openvpn/luasrc/model/cbi/openvpn-file.lua b/applications/luci-app-openvpn/luasrc/model/cbi/openvpn-file.lua
+index fa823964a..7197f45ef 100644
+--- a/applications/luci-app-openvpn/luasrc/model/cbi/openvpn-file.lua
++++ b/applications/luci-app-openvpn/luasrc/model/cbi/openvpn-file.lua
+@@ -51,7 +51,7 @@ function file.cfgvalue()
+ end
+ 
+ function file.write(self, section, data1)
+-	return fs.writefile(cfg_file, "\n" .. util.trim(data1:gsub("\r\n", "\n")) .. "\n")
++	return fs.writefile(cfg_file, util.trim(data1:gsub("\r\n", "\n")) .. "\n")
+ end
+ 
+ function file.remove(self, section, value)
 diff --git a/applications/luci-app-polipo/luasrc/model/cbi/polipo.lua b/applications/luci-app-polipo/luasrc/model/cbi/polipo.lua
 index 6031c8423..8308b2c46 100644
 --- a/applications/luci-app-polipo/luasrc/model/cbi/polipo.lua
