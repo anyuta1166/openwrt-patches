@@ -1,3 +1,15 @@
+diff --git a/net/i2pd/files/i2pd.init b/net/i2pd/files/i2pd.init
+index b6a4de8a9..392a00390 100755
+--- a/net/i2pd/files/i2pd.init
++++ b/net/i2pd/files/i2pd.init
+@@ -61,6 +61,7 @@ start_instance() {
+ 
+ 	procd_open_instance
+ 	procd_set_param command "$PROG" --datadir="$data_dir" --conf="$CONFFILE" --pidfile "$PIDFILE"
++	procd_set_param respawn
+ 	## Don't know about i2pd user's HOME
+ 	procd_set_param env "HOME=$data_dir"
+ 	procd_set_param limits nofile=4096
 diff --git a/net/tinyproxy/files/tinyproxy.config b/net/tinyproxy/files/tinyproxy.config
 index ac7b46ff0..fe5bf39a1 100644
 --- a/net/tinyproxy/files/tinyproxy.config
