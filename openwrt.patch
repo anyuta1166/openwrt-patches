@@ -1,8 +1,8 @@
 diff --git a/package/network/utils/ipset/Makefile b/package/network/utils/ipset/Makefile
-index bc4945e0f6..3d9d3343ab 100644
+index 65133d105c..daf0be954d 100644
 --- a/package/network/utils/ipset/Makefile
 +++ b/package/network/utils/ipset/Makefile
-@@ -59,9 +59,17 @@ define Build/InstallDev
+@@ -59,10 +59,18 @@ define Build/InstallDev
  	$(CP) $(PKG_BUILD_DIR)/lib/libipset.pc $(1)/usr/lib/pkgconfig/
  endef
  
@@ -13,6 +13,7 @@ index bc4945e0f6..3d9d3343ab 100644
  define Package/ipset/install
  	$(INSTALL_DIR) $(1)/usr/sbin
  	$(CP) $(PKG_INSTALL_DIR)/usr/sbin/ipset $(1)/usr/sbin/
+ 	$(CP) $(PKG_INSTALL_DIR)/usr/sbin/ipset-translate $(1)/usr/sbin/
 +	$(INSTALL_DIR) $(1)/etc/init.d
 +	$(INSTALL_BIN) ./files/ipset.init $(1)/etc/init.d/ipset
 +	$(INSTALL_DIR) $(1)/etc/
